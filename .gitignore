@@ -3,3 +3,4 @@ MY_SETUP
 __pycache__/
 *.pyc
 .direnv/
+.envrc
