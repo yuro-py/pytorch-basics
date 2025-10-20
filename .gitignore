@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 .direnv/
 .envrc
+test_library.py
