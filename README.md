@@ -1,4 +1,4 @@
 # PyTorch Basics
 
-1. learning pytorch
-2. implementing linear algebra concepts using pytorch
+1. Learning PyTorch.
+2. Implementing Linear Algebra concepts using PyTorch.
