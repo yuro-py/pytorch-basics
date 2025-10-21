@@ -12,4 +12,3 @@ print(s1 + s2)  # addition
 # similarly other operations can be performed on scalars and it will behave as expected.
 
 # ----------------------------------------
-# this is in vim mode
