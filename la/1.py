@@ -7,8 +7,17 @@ import torch
 
 s1 = torch.tensor(10)
 s2 = torch.tensor(99)
+print(s1 + s2)
 
-print(s1 + s2)  # addition
-# similarly other operations can be performed on scalars and it will behave as expected.
+# ----------------------------------------------------------------------------------------------------------------
+# 2. VECTOR(1-D TENSOR)
+# single dimension/axis/direction.
+# best to describe one information with many features like a "house" with [price, room, size].
 
-# ----------------------------------------
+v1 = torch.tensor([1, 2, 3])
+v2 = torch.tensor([4, 5, 6])
+print(v1 + v2)
+
+# ----------------------------------------------------------------------------------------------------------------
+# 3. MATRIX(2-D TENSOR)
+#
