@@ -50,11 +50,11 @@ def matrix():
 
 # ----------------------------------------------------------------------------------------------------------------
 # 4. N-D TENSOR
-# 3D is a cube of numbers or a stack of matrices.
-# 4-D is used in images.
-# 5-D is used in videos.
+# 3-D is a cube of numbers or a stack of matrices.
+# 4-D is a collection of 3Ds and used in images.
+# 5-D is a collection of 4Ds and used in videos.
 # etc
-def t3d():
+def t3d():  # a batch of two matrices
     t3d1 = torch.tensor(
         [
             [[1, 2], [3, 4]],  # MATRIX 1
@@ -75,6 +75,7 @@ def t3d():
     print("------------------------")
 
 
+# execution block
 while True:
     print("what to perform?")
     print("1. scalar")

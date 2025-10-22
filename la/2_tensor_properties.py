@@ -1,0 +1,3 @@
+import torch
+
+#PROPERTIES OF TENSORS
