@@ -3,5 +3,5 @@ MY_SETUP
 __pycache__/
 *.pyc
 .direnv/
-.envrc
+#.envrc
 test_library.py
