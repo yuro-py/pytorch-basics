@@ -20,5 +20,3 @@ print("")
 # MULTIPLIES THE VECTOR TO EVERY ELEMENT OF THE TENSOR
 print(f"Tensor 1 * 5 :-\n{a * 5}")
 print(f"Tensor 2 * 3 :-\n{b * 3}")
-
-# 4. BROADCASTING
