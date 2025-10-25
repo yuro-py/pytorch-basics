@@ -10,3 +10,5 @@ b = torch.tensor([10, 20, 30])  # SHAPE = (3,)
 
 print(f"Using @ : {a @ b}")
 print(f"Using torch.matmul : {torch.matmul(a, b)}")
+
+# SLIGHT DIFFERENCE BETWEEN USING "@" AND "torch.matmul" BUT EXCLUSIVE FOR SPECIFIC CASES, NOT GENERAL ONES.
