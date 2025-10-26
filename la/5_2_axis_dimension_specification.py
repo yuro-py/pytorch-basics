@@ -17,4 +17,3 @@ b = torch.mean(a, dim=1)
 print(f"Mean of columns : {b}")
 
 # MAIN GOAL HERE ACHIEVED WAS COLLAPSING, NOT AN ENTIRE TENSOR, BUT SELECTIVELY ROWS OR COLUMNS
-
