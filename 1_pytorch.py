@@ -15,4 +15,6 @@ a = torch.tensor([2, 2], dtype=torch.int32, device="cpu", requires_grad=False)
 # inner values(a's row and b's column) should be same. or else error in multiplication.
 # use http://matrixmultiplication.xyz/ to visualize
 # --------------------------------------------------------
-#
+
+# for reducing the size of the tensor : sum, mean, min, max; can specify the dim asw.
+# for finding the index quantity use "var.argmax()" or "var.argmin()"
