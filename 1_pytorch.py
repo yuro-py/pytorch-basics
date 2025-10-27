@@ -9,5 +9,10 @@ a = torch.tensor([2, 2], dtype=torch.int32, device="cpu", requires_grad=False)
 # device can be cpu, gpu, cuda etc. two co-operational tensors should have the same device.
 # requires_grad is a bool var. it asks if tracking of the tensor for gradient computation. this feature is called autograd(automatic differentiation).
 
-# ---------------------------------------------
-# manipulating tensors
+# --------------------------------------------------------
+# MATRIX MULTIPLICATION
+# torch.matmul = torch.mm = @
+# inner values(a's row and b's column) should be same. or else error in multiplication.
+# use http://matrixmultiplication.xyz/ to visualize
+# --------------------------------------------------------
+#
