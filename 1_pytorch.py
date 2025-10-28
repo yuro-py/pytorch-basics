@@ -29,17 +29,17 @@ x = torch.tensor([[1, 2], [3, 4], [5, 6]])
 print(x)
 # xr = x.reshape(1, 9)
 # print(xr)  # print(x.shape, xr.shape)
-print()
+# print()
 
 # 2. view : without creating a new one in memory, returns another reshaped view of an input tensor.
 # z = x.view(1, 9)  # same as reshape using x's memory. hence, changing z changes x.
 # print(z)
 
-# 3. stacking : combine multiple tensors on top. torch.stack(for basic stack), torch.vstack(for vertical) and torch.hstack(for side by side).
-x_stack = torch.stack(
-    [x, x, x, x], dim=2
-)  # IMPORTANT : the higher the dim value, the inner the brackets go. lowest dim = outermost bracket.
-print(x_stack)
+# 3. stacking : combine multiple tensors on top. torch.stack(for basic stack), torch.vstack(for vertical) and torch.hstack(for horizontal).
+# x_stack = torch.stack(
+#    [x, x, x, x], dim=2
+# )  # IMPORTANT : the higher the dim value, the inner the brackets go. lowest dim = outermost bracket. highest dim = treatment as scalars.
+# print(x_stack)
 # print(x.shape)
 # print()
 
