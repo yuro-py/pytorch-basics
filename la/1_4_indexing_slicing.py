@@ -1,7 +1,6 @@
 import torch
 
 # 1. INDEXING
-
 t = torch.tensor([[1, 2, 3, 4], [5, 6, 7, 8]])
 print(f"The tensor we are working on :-\n {t}")
 print("----------------------")
