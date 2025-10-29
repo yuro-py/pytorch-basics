@@ -12,7 +12,7 @@ import numpy as np
 # print(a)
 # device can be cpu, gpu, cuda etc. two co-operational tensors should have the same device.
 # requires_grad is a bool var. it asks if tracking of the tensor for gradient computation. this feature is called autograd(automatic differentiation).
-
+a = torch.tensor
 # ---------------------------------------------------------------------------------------------------------------
 # MATRIX MULTIPLICATION
 # torch.matmul = torch.mm = @
