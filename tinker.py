@@ -1,7 +1,7 @@
 import torch
 
-A = torch.randn(2048, 2048, dtype=torch.bfloat16)
-B = torch.randn(2048, 2048, dtype=torch.bfloat16)
-ref = torch.mm(A, B)
+a = torch.randn(2048, 2048, device="cuda", dtype=torch.bfloat16)
+b = torch.randn(2048, 2048, device="cuda", dtype=torch.bfloat16)
+ref = torch.mm(a, b)
 for _ in range(1000):
-    assert (torch.mm(A, B) - ref).abs().max().item() == 0
+    assert (torch.mm(a, b) - ref).abs().max().item() == 0
