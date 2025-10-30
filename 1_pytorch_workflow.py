@@ -1,8 +1,5 @@
 import torch
 from torch import nn  # nn contains all of pytorch building blocks for Neural Networks
-# import matplotlib
-
-# matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 
 
@@ -77,6 +74,3 @@ def plot_predictions(
     plt.legend(prop={"size": 14})
 
     plt.show()
-
-
-plot_predictions()
