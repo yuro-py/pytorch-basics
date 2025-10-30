@@ -74,3 +74,7 @@ def plot_predictions(
     plt.legend(prop={"size": 14})
 
     plt.show()
+
+
+plot_predictions()
+
