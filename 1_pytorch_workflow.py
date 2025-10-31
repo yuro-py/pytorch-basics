@@ -17,13 +17,13 @@ import matplotlib.pyplot as plt
 # 1. PREPARING/LOADING DATA
 # LINEAR REGRESSION FORMULA :-
 # Y = a + bX
-# use the formula to make a stright line with known parameters(parameter is something that a model learns)
+# use the formula to make a straight line with known parameters(parameter is something that a model learns)
 
 # creating known parameters:-
-weight = 0.7
-bias = 0.3
+weight = 0.7  # as 'a' in the formula
+bias = 0.3  # as 'b' in the formula
 
-# create
+# create sample dataset
 start = 0
 end = 1
 step = 0.02
@@ -44,7 +44,7 @@ X_train, y_train = X[:split], y[:split]  # train features & train labels
 X_test, y_test = X[split:], y[split:]  # testing features & testing labels
 
 # print(x_train, y_train, x_test, y_test)
-print(len(X_train), len(y_train), len(X_test), len(y_test))
+# print(len(X_train), len(y_train), len(X_test), len(y_test))
 
 
 def plot_predictions(
@@ -76,5 +76,28 @@ def plot_predictions(
     plt.show()
 
 
-plot_predictions()
+# plot_predictions()
 
+
+# -------------------------------------------------------------------------------------------------------------------------------------------
+# 2. Build a model
+# create a linear regression model class
+class LinearRegressionModel(
+    nn.Module
+):  # -> nn.Module is the base class of all pytorch classes and features.
+    def __init__(self):
+        super().__init__()
+
+        # two parameters called weight and bias
+        self.weight = nn.Parameter(
+            torch.randn(1, requires_grad=True, dtype=torch.float32)
+        )
+        self.bias = nn.Parameter(
+            torch.randn(1, requires_grad=True, dtype=torch.float32)
+        )
+
+        def forward(self, x: torch.Tensor) -> torch.Tensor:
+            return self.weights * x + self.bias  # linear regression model
+
+
+# gradient descent algorithm
