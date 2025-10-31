@@ -81,7 +81,7 @@ def plot_predictions(
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
 # 2. Build a model
-# create a linear regression model class
+# Create a linear regression model class
 class LinearRegressionModel(
     nn.Module
 ):  # -> nn.Module is the base class of all pytorch classes and features.
