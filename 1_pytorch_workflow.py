@@ -121,8 +121,8 @@ class LinearRegressionModel(nn.Module):
 
 # gradient descent algorithm -> the randn func will generate random values for weight and biases.
 # this algo will adjust the w and b, as close as possible to become a straight line with known parameters.
-#
-#
+
+
 torch.manual_seed(42)
 model_0 = LinearRegressionModel()
 print(model_0.state_dict())  # lists the model's parameters
@@ -145,4 +145,42 @@ plot_predictions(predictions=y_preds)
 
 loss = nn.L1Loss()
 optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01)
-# SGD = one of the many algos for optimizing.
+# a. SGD = one of the many algos for optimizing.
+# b. lr = Learning rate. It decides how much value to modify in
+# the parameters during optimizing. deciding perfect value comes with time.
+
+# loss value = MAE (mean absolute error)
+# -------------------------------------------------------------------------------------------------------------------------------------------
+# 4. Building a training/testing loop.
+# a. loop through the data.
+# b. forward(or forward propagation) pass to make predictions-> this involves data moving through the model's forward() functions
+# c. calculate the loss(compare forward pass to "ground truth labels")
+# d. optimizer zero grad
+# e. loss backwards -> move backwards thru nn to calc the grads of each params with respect to the loss.
+# f. optimizer step -> use the optim to adjust the params to improve the loss(gradient descent)
+
+epochs = 1
+# an epoch is one loop through the data
+
+for epoch in range(epochs):
+    # set the model to training mode. this mode sets all params that require gradients to "require gradients".
+    model_0.train()
+
+    # 1. forward pass
+    y_pred = model_0(x_test)
+
+    # 2.calculate the loss
+    #  loss = loss_fn(y_pred, y_train)  # or nn.L1Loss()
+
+    # 3. optimizer zero grad
+    optimizer.zero_grad()
+
+    # 4. backpropagation on the loss
+    # loss.backward()
+
+    # 5. step the optimizer(perform gradient descent)
+    optimizer.step()
+
+    # turns off gradient tracking
+    model_0.eval()
+# calculating loss in the plot graph = distance between each "test dot and predictions dot" and their mean.
