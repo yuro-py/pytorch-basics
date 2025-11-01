@@ -2,7 +2,7 @@ import torch
 from torch import nn  # nn contains all of pytorch building blocks for Neural Networks
 import matplotlib.pyplot as plt
 
-
+# device = "cuda" if torch.cuda.is_available() else "cpu"
 # one of many pytorch's workflow:-
 # 1. Get data ready(turn to tensors)
 # 2. build/pick a pre-trained model
@@ -81,10 +81,24 @@ def plot_predictions(
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
 # 2. Build a model
-# Create a linear regression model class
-class LinearRegressionModel(
-    nn.Module
-):  # -> nn.Module is the base class of all pytorch classes and features.
+# pytorch model building essentials:-
+# a. torch.nn -> contains all the building blocks of a neural network/computational graph
+# b. torch.nn.Parameter -> what parameters should our model try and learn
+# c. torch.nn.Module -> the base class for all neural network modules, if you subclass it, you should overwrite forward()
+# d. torch.optim -> this is where the optimizers in pytorch live, they will help with gradient descent.
+# the optimizers contain the algorithms that optimize the random values in the dataset to represent something meaningful.
+# e. def forward() -> all nn.Module subclasses require you to overwrite forward(). this methond defines the computation.
+# Create a linear regression model class:-
+# WHAT DOES THIS MODEL DO :-
+# 1. Start with random values(weight and bias).
+# 2. Look at the training data and adjust the random values to better represent
+# (or get closer to) the ideal values (the weight and bias) we used to create the data).
+#
+# Two methods for achieving it(in a combination):-
+# 1. gradient descent algorithm
+# 2. backpropagation
+class LinearRegressionModel(nn.Module):
+    # -> nn.Module is the base class of all pytorch classes and features.
     def __init__(self):
         super().__init__()
 
@@ -96,8 +110,23 @@ class LinearRegressionModel(
             torch.randn(1, requires_grad=True, dtype=torch.float32)
         )
 
-        def forward(self, x: torch.Tensor) -> torch.Tensor:
-            return self.weights * x + self.bias  # linear regression model
+        # in a small dataset/model we can define weight/bias,
+        # but in a real huge dataset/model, this is done by "nn".
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return self.weight * x + self.bias  # linear regression model
+
+    # any subclass of nn module requires "forward" method for computation.
 
 
-# gradient descent algorithm
+# gradient descent algorithm -> the randn func will generate random values for weight and biases.
+# this algo will adjust the w and b, as close as possible to become a straight line with known parameters.
+#
+#
+# -------------------------------------------------------------------------------------------------------------------------------------------
+#
+torch.manual_seed(42)
+
+model_0 = LinearRegressionModel()
+# print(list(model_0.parameters()))
+print(model_0.state_dict())
