@@ -142,7 +142,7 @@ plot_predictions(predictions=y_preds)
 # Things we need to train:-
 # 1. lossfunction : it checks how wrong our output is compared to the ideal output. lower is better.
 # 2. optimizer : takes the loss and adjusts the model's parameters.
-#
+
 loss = nn.L1Loss()
 optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01)
 # SGD = one of the many algos for optimizing.
