@@ -130,3 +130,4 @@ torch.manual_seed(42)
 model_0 = LinearRegressionModel()
 # print(list(model_0.parameters()))
 print(model_0.state_dict())
+
