@@ -27,8 +27,8 @@ bias = 0.3  # as 'b' in the formula
 start = 0
 end = 1
 step = 0.02
-X = torch.arange(start, end, step).unsqueeze(dim=1)
-y = bias + (weight * X)
+x = torch.arange(start, end, step).unsqueeze(dim=1)
+y = bias + (weight * x)
 # print(X[:10], y[:10], len(X), len(y))
 
 # 1. splitting data into training and test-sets(imp in ml)
@@ -39,18 +39,18 @@ y = bias + (weight * X)
 # (generalization = ability for a machine learning model to perform well on data it hasn't seen before)
 
 # creating a training split of 80-20:-
-split = int(0.8 * len(X))
-X_train, y_train = X[:split], y[:split]  # train features & train labels
-X_test, y_test = X[split:], y[split:]  # testing features & testing labels
+split = int(0.8 * len(x))
+x_train, y_train = x[:split], y[:split]  # train features & train labels
+x_test, y_test = x[split:], y[split:]  # testing features & testing labels
 
 # print(x_train, y_train, x_test, y_test)
 # print(len(X_train), len(y_train), len(X_test), len(y_test))
 
 
 def plot_predictions(
-    train_data=X_train,
+    train_data=x_train,
     train_label=y_train,
-    test_data=X_test,
+    test_data=x_test,
     test_label=y_test,
     predictions=None,
 ):
@@ -123,11 +123,26 @@ class LinearRegressionModel(nn.Module):
 # this algo will adjust the w and b, as close as possible to become a straight line with known parameters.
 #
 #
-# -------------------------------------------------------------------------------------------------------------------------------------------
-#
 torch.manual_seed(42)
-
 model_0 = LinearRegressionModel()
-# print(list(model_0.parameters()))
-print(model_0.state_dict())
+print(model_0.state_dict())  # lists the model's parameters
 
+# Making predictions using torch.inference_mode(). using it turns off requires_grad.
+# testing prediction for "y_test" based on "x_test"
+with torch.inference_mode():
+    y_preds = model_0(x_test)
+print(y_preds)
+
+plot_predictions(predictions=y_preds)
+
+# -------------------------------------------------------------------------------------------------------------------------------------------
+# 3. Train a model(building intuition):-
+# a way to measure how poor or how wrong a model's predictions are,
+# one way is to use a "loss function".
+# Things we need to train:-
+# 1. lossfunction : it checks how wrong our output is compared to the ideal output. lower is better.
+# 2. optimizer : takes the loss and adjusts the model's parameters.
+#
+loss = nn.L1Loss()
+optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01)
+# SGD = one of the many algos for optimizing.
