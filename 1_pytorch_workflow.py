@@ -83,7 +83,7 @@ def plot_predictions(
 # 2. Build a model
 # pytorch model building essentials:-
 # a. torch.nn -> contains all the building blocks of a neural network/computational graph
-# b. torch.nn.Parameter -> what parameters should our model try and learn
+# b. torch.nn.Parameter -> what parameters should our model learn
 # c. torch.nn.Module -> the base class for all neural network modules, if you subclass it, you should overwrite forward()
 # d. torch.optim -> this is where the optimizers in pytorch live, they will help with gradient descent.
 # the optimizers contain the algorithms that optimize the random values in the dataset to represent something meaningful.
