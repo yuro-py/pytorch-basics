@@ -191,3 +191,12 @@ for epoch in range(epochs):
     # turns off gradient tracking
     model_0.eval()
 
+
+# re-run and prediction and test the graph changes:-
+def pred_new():
+    with torch.inference_mode():
+        y_pred_test = model_0(x_test)
+    plot_predictions(predictions=y_pred_test)
+
+
+pred_new()
