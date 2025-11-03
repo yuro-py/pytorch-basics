@@ -30,7 +30,7 @@ def plot(train_data=x_train, train_label=y_train, test_data=x_test, test_label=y
 
     plt.show()
 
-plot()
+#plot()
 
 class LinearRegressionModel(nn.Module):
 
@@ -41,23 +41,42 @@ class LinearRegressionModel(nn.Module):
 
         self.bias = nn.Parameter(torch.randn(1, requires_grad=True, dtype=torch.float32))
 
-        def forward(self, x: torch.Tensor) -> torch.Tensor:
-            return self.weight * x + self.bias
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return self.weight * x + self.bias
+
+# running/testing the class above
+torch.manual_seed(42)
+model0 = LinearRegressionModel()
+print(model0.state_dict())
 
 
+with torch.inference_mode():
+    y_preds = model0(x_test)
+print(y_preds)
 
 
+#plot(predictions=y_preds)
+
+loss_fn = nn.L1Loss
+optimizer = torch.optim.SGD(params=model0.parameters(), lr=0.01)
 
 
+epochs = 1
+for epoch in range(epochs):
 
+    model0.train() # set to training mode
 
+    y_pred = model0(x_train) # forward pass
 
+    loss = loss_fn(y_pred, y_train) # calculate the loss
 
+    optimizer.zero_grad() #optimizer zero grad
 
+    loss.backward() # backpropagation on loss, with the parameters
 
+    optimizer.step() # performs gradient descent
 
-
-
+    model0.eval() # turns off gradient descent
 
 
 

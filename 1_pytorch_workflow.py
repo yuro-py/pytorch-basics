@@ -1,4 +1,5 @@
 import torch
+import numpy
 from torch import nn  # nn contains all of pytorch building blocks for Neural Networks
 import matplotlib.pyplot as plt
 
@@ -57,7 +58,7 @@ def plot_predictions(
     """
     Plots training data, test data and compares predictions.
     """
-    plt.figure(figsize=(10, 7))
+    plt.figure(figsize=(5, 5))
 
     # Plot training data in blue
     plt.scatter(train_data, train_label, c="b", s=4, label="Training data")
@@ -84,7 +85,7 @@ def plot_predictions(
 # pytorch model building essentials:-
 # a. torch.nn -> contains all the building blocks of a neural network/computational graph
 # b. torch.nn.Parameter -> what parameters should our model learn
-# c. torch.nn.Module -> the base class for all neural network modules, if you subclass it, you should overwrite forward()
+# c. torch.nn.Module -> the base class for all neural network modules, if you use it as a subclass, you should overwrite forward()
 # d. torch.optim -> this is where the optimizers in pytorch live, they will help with gradient descent.
 # the optimizers contain the algorithms that optimize the random values in the dataset to represent something meaningful.
 # e. def forward() -> all nn.Module subclasses require you to overwrite forward(). this methond defines the computation.
@@ -125,13 +126,13 @@ class LinearRegressionModel(nn.Module):
 
 torch.manual_seed(42)
 model_0 = LinearRegressionModel()
-print(model_0.state_dict())  # lists the model's parameters
+# print(model_0.state_dict())  # lists the model's parameters
 
 # Making predictions using torch.inference_mode(). using it turns off requires_grad.
 # testing prediction for "y_test" based on "x_test"
 with torch.inference_mode():
     y_preds = model_0(x_test)
-print(y_preds)
+# print(y_preds)
 
 plot_predictions(predictions=y_preds)
 
@@ -143,11 +144,14 @@ plot_predictions(predictions=y_preds)
 # 1. lossfunction : it checks how wrong our output is compared to the ideal output. lower is better.
 # 2. optimizer : takes the loss and adjusts the model's parameters.
 
-loss = nn.L1Loss()
+loss_fn = nn.L1Loss()
 optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01)
 # a. SGD = one of the many algos for optimizing.
 # b. lr = Learning rate. It decides how much value to modify in
 # the parameters during optimizing. deciding perfect value comes with time.
+
+# inside an optimizer, we need to tell the parameters we would like to modidy using "params",
+# and the learning rate has to be specified as well.
 
 # loss value = MAE (mean absolute error)
 # -------------------------------------------------------------------------------------------------------------------------------------------
@@ -159,7 +163,9 @@ optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01)
 # e. loss backwards -> move backwards thru nn to calc the grads of each params with respect to the loss.
 # f. optimizer step -> use the optim to adjust the params to improve the loss(gradient descent)
 
-epochs = 1
+torch.manual_seed(42)
+
+epochs = 300
 # an epoch is one loop through the data
 
 for epoch in range(epochs):
@@ -167,20 +173,21 @@ for epoch in range(epochs):
     model_0.train()
 
     # 1. forward pass
-    y_pred = model_0(x_test)
+    y_pred = model_0(x_train)
 
     # 2.calculate the loss
-    #  loss = loss_fn(y_pred, y_train)  # or nn.L1Loss()
+    loss = loss_fn(y_pred, y_train)  # or nn.L1Loss()
+    # print(f"Loss : {loss}")
 
     # 3. optimizer zero grad
     optimizer.zero_grad()
 
     # 4. backpropagation on the loss
-    # loss.backward()
+    loss.backward()
 
     # 5. step the optimizer(perform gradient descent)
     optimizer.step()
 
     # turns off gradient tracking
     model_0.eval()
-# calculating loss in the plot graph = distance between each "test dot and predictions dot" and their mean.
+
