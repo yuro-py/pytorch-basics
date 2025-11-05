@@ -57,7 +57,7 @@ opti = torch.optim.SGD(params=model_0.parameters(), lr = 0.01)
 
 
 torch.manual_seed(42)
-epochs = 100
+epochs = int(input("Epochs -> "))
 
 for epoch in range(epochs):
 
