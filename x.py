@@ -63,7 +63,7 @@ for epoch in range(epochs):
 
     model_0.train()
 
-    print(f"Epoch : {epoch}")
+    print(f"Epoch : {epoch+1}")
     y_preds = model_0(x_train)
 
     loss = loss_fn(y_preds, y_train)
