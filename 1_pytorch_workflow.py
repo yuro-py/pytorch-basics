@@ -94,7 +94,8 @@ def plot_predictions(
 # 1. Start with random values(weight and bias).
 # 2. Look at the training data and adjust the random values to better represent
 # (or get closer to) the ideal values (the weight and bias) we used to create the data).
-#
+
+
 # Two methods for achieving it(in a combination):-
 # 1. gradient descent algorithm
 # 2. backpropagation
@@ -200,3 +201,5 @@ def pred_new():
 
 
 pred_new()
+
+# video -> 6hr 49min
