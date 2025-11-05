@@ -135,7 +135,7 @@ with torch.inference_mode():
     y_preds = model_0(x_test)
 # print(y_preds)
 
-plot_predictions(predictions=y_preds)
+# plot_predictions(predictions=y_preds)
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
 # 3. Train a model(building intuition):-
@@ -166,8 +166,13 @@ optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01)
 
 torch.manual_seed(42)
 
-epochs = 180
+epochs = 200
 # an epoch is one loop through the data
+
+# Tracking experience
+epoch_count = []
+loss_values = []
+test_loss_values = []
 
 for epoch in range(epochs):
     # set the model to training mode. this mode sets all params that require gradients to "require gradients".
@@ -197,9 +202,13 @@ for epoch in range(epochs):
         test_loss = loss_fn(test_pred, y_test)
 
         if epoch % 10 == 1:
-            print("----------------------------------")
-            print(f"Epoch :{epoch} | Loss : {loss} | Test_loss : {test_loss}")
-            print(model_0.state_dict())
+            epoch_count.append(epoch)
+            loss_values.append(loss.item())
+            test_loss_values.append(test_loss.item())
+
+            # print("----------------------------------")
+            # print(f"Epoch :{epoch} | Loss : {loss} | Test_loss : {test_loss}")
+            # print(model_0.state_dict())
 
 
 # re-run and prediction and test the graph changes:-
@@ -209,5 +218,23 @@ def pred_new():
     plot_predictions(predictions=y_pred_test)
 
 
-pred_new()
+# pred_new()
+# print(epoch_count)
+# print(loss_values)
+# print(test_loss_values)
 
+
+# Plotting loss curves
+def loss_curves():
+    plt.figure(figsize=(6, 6), label="Loss Curve Graph")
+    plt.plot(epoch_count, test_loss_values, c="b", label="Test loss")
+    plt.plot(epoch_count, loss_values, c="g", label="Train Loss")
+    plt.title("Training and test loss curves")
+    plt.ylabel("Loss")
+    plt.xlabel("Epochs")
+    plt.legend()
+
+    plt.show()
+
+
+loss_curves()
