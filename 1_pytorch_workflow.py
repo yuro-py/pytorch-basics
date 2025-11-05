@@ -166,7 +166,7 @@ optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01)
 
 torch.manual_seed(42)
 
-epochs = 300
+epochs = 180
 # an epoch is one loop through the data
 
 for epoch in range(epochs):
@@ -191,6 +191,15 @@ for epoch in range(epochs):
 
     # turns off gradient tracking
     model_0.eval()
+    with torch.inference_mode():
+        test_pred = model_0(x_test)
+
+        test_loss = loss_fn(test_pred, y_test)
+
+        if epoch % 10 == 1:
+            print("----------------------------------")
+            print(f"Epoch :{epoch} | Loss : {loss} | Test_loss : {test_loss}")
+            print(model_0.state_dict())
 
 
 # re-run and prediction and test the graph changes:-
@@ -202,4 +211,3 @@ def pred_new():
 
 pred_new()
 
-# video -> 6hr 49min

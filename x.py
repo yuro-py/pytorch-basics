@@ -61,9 +61,12 @@ epochs = int(input("Epochs -> "))
 
 for epoch in range(epochs):
 
+    print(f"Epoch : {epoch+1}")
+
+    print(f"W&B-> {model_0.state_dict()}")
+
     model_0.train()
 
-    print(f"Epoch : {epoch+1}")
     y_preds = model_0(x_train)
 
     loss = loss_fn(y_preds, y_train)
