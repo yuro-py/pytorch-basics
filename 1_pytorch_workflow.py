@@ -177,7 +177,7 @@ for epoch in range(epochs):
     y_pred = model_0(x_train)
 
     # 2.calculate the loss
-    loss = loss_fn(y_pred, y_train)  # or nn.L1Loss()
+    loss = loss_fn(y_pred, y_train)
     # print(f"Loss : {loss}")
 
     # 3. optimizer zero grad
