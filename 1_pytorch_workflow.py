@@ -1,9 +1,18 @@
+# DON'T TOUCH BELOW TWO LINES OF CODE
+import time
+
+start_time = time.perf_counter()
+# DON'T TOUCH ABOVE TWO LINES OF CODE
+
+from pathlib import Path
 import torch
 import numpy
 from torch import nn  # nn contains all of pytorch building blocks for Neural Networks
 import matplotlib.pyplot as plt
 
+
 # device = "cuda" if torch.cuda.is_available() else "cpu"
+
 # one of many pytorch's workflow:-
 # 1. Get data ready(turn to tensors)
 # 2. build/pick a pre-trained model
@@ -77,7 +86,7 @@ def plot_predictions(
     plt.show()
 
 
-# plot_predictions()
+plot_predictions()
 
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,26 +108,16 @@ def plot_predictions(
 # Two methods for achieving it(in a combination):-
 # 1. gradient descent algorithm
 # 2. backpropagation
+
+
 class LinearRegressionModel(nn.Module):
-    # -> nn.Module is the base class of all pytorch classes and features.
     def __init__(self):
         super().__init__()
 
-        # two parameters called weight and bias
-        self.weight = nn.Parameter(
-            torch.randn(1, requires_grad=True, dtype=torch.float32)
-        )
-        self.bias = nn.Parameter(
-            torch.randn(1, requires_grad=True, dtype=torch.float32)
-        )
-
-        # in a small dataset/model we can define weight/bias,
-        # but in a real huge dataset/model, this is done by "nn".
+        self.linear_layer = nn.Linear(in_features=1, out_features=1)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return self.weight * x + self.bias  # linear regression model
-
-    # any subclass of nn module requires "forward" method for computation.
+        return self.linear_layer(x)
 
 
 # gradient descent algorithm -> the randn func will generate random values for weight and biases.
@@ -135,7 +134,7 @@ with torch.inference_mode():
     y_preds = model_0(x_test)
 # print(y_preds)
 
-# plot_predictions(predictions=y_preds)
+plot_predictions(predictions=y_preds)
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
 # 3. Train a model(building intuition):-
@@ -218,7 +217,8 @@ def pred_new():
     plot_predictions(predictions=y_pred_test)
 
 
-# pred_new()
+pred_new()
+
 # print(epoch_count)
 # print(loss_values)
 # print(test_loss_values)
@@ -238,3 +238,39 @@ def loss_curves():
 
 
 loss_curves()
+
+
+# DON'T TOUCH : MODEL SAVING/LOADING SYSTEM
+# 1. create models dir
+MODEL_PATH = Path("models")
+MODEL_PATH.mkdir(parents=True, exist_ok=True)
+# 2. create model save path
+MODEL_NAME = "01_pytorch_workflow_model_0.pt"
+MODEL_SAVE_PATH = MODEL_PATH / MODEL_NAME
+
+# print(f"Saving model to : {MODEL_SAVE_PATH}")
+# torch.save(obj=model_0.state_dict(), f=MODEL_SAVE_PATH)
+
+# loaded_model_0 = LinearRegressionModel()
+# loaded_model_0.load_state_dict(torch.load(f=MODEL_SAVE_PATH))
+# DON'T TOUCH : MODEL SAVING/LOADING SYSTEM
+
+# Running and seeing the saved model
+# loaded_model_0.eval()
+# with torch.inference_mode():
+#    loaded_model_preds = loaded_model_0(x_test)
+# print(loaded_model_preds)
+
+
+# model_0.eval()
+# with torch.inference_mode():
+#    y_preds = model_0(x_test)
+# print(y_preds)
+
+# print(loaded_model_preds == y_preds)
+
+# DON'T TOUCH : MODEL RUNNING TIME CALCULATOR
+end_time = time.perf_counter()
+execution_time = end_time - start_time
+print(f"Execution time: {execution_time:.6f} seconds")
+# DON'T TOUCH ABOVE THREE LINES OF CODE
