@@ -11,9 +11,6 @@ from sklearn.datasets import make_circles
 n_samples = 1000
 
 x, y = make_circles(n_samples, noise=0.03, random_state=42)
-# print(len(x), len(y))
-# print(x[:5], y[:5])
-# here two features of x relate to one feature of y
 
 circles = pd.DataFrame({"x1": x[:, 0], "x2": x[:, 1], "label": y})
 print(circles.head(10))
