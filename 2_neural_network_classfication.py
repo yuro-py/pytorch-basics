@@ -1,0 +1,24 @@
+# neural network classification
+# classification is the problem of predicting whether soemthing is one thing or another(there can be multiple things as options)
+
+# make classification data and get it ready
+import sklearn
+from sklearn.datasets import make_circles
+
+n_samples = 1000
+
+x, y = make_circles(n_samples, noise=0.03, random_state=42)
+# print(len(x), len(y))
+# print(x[:5], y[:5])
+# here two features of x relate to one feature of y
+
+import pandas as pd
+
+circles = pd.DataFrame({"x1": x[:, 0], "x2": x[:, 1], "label": y})
+print(circles.head(10))
+
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 7))
+plt.scatter(x=x[:, 0], y=x[:, 1], c=y, cmap=plt.cm.RdYlBu)
+plt.show()
